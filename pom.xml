@@ -11,11 +11,26 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <serenity.version>3.3.4</serenity.version>
+        <serenity.version>3.2.1</serenity.version>
         <encoding>UTF-8</encoding>
         <tags></tags>
         <webdriver.base.url></webdriver.base.url>
     </properties>
+    <repositories>
+        <repository>
+            <id>serenity</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/serenity/maven</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>serenity</id>
+            <name>bintray-plugins</name>
+            <url>http://dl.bintray.com/serenity/maven</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
@@ -50,7 +65,7 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.8.2</version>
+            <version>1.8.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -73,21 +88,41 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.23.1</version>
+            <version>3.6.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.browserstack</groupId>
+            <artifactId>browserstack-local-java</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
@@ -141,4 +176,30 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>parallel</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <includes>
+                                <include>starter/Parallel*.java</include>
+                            </includes>
+                            <parallel>classes</parallel>
+                            <threadCount>6</threadCount>
+                            <forkCount>6</forkCount>
+                            <reuseForks>false</reuseForks>
+                            <systemPropertyVariables>
+                                <environment>parallel_${surefire.forkNumber}</environment>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
