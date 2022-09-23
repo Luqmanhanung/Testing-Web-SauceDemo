@@ -4,13 +4,21 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import starter.Pages.InventoryPage;
 import starter.Pages.LoginPage;
+import static org.junit.Assert.*;
+
+import javax.swing.*;
 
 public class LoginStepDef {
     LoginPage loginPage;
+    InventoryPage inventoryPage;
+    Action action;
+
+    
 
     @Given("I am on the login page")
-    public void iAmAlreadyOnLoginPage(){
+    public void iAmOnTheLoginPage(){
         loginPage.open();
     }
 
@@ -31,6 +39,15 @@ public class LoginStepDef {
 
     @Then("I am directed to inventory page")
     public void iAmDirectedToInventoryPage(){
-
+        assertEquals("https://www.saucedemo.com/inventory.html", inventoryPage.getUrl());
+        assertEquals("PRODUCTS", inventoryPage.getHeaderTitle());
+        assertTrue(inventoryPage.isShowIconHeader());
+    }
+    @Given("I am already logged in")
+    public void alreadyLoggedIn(){
+        loginPage.open();
+        loginPage.inputUsername("standard_user");
+        loginPage.inputPassword("secret_sauce");
+        loginPage.clickLoginButton();
     }
 }

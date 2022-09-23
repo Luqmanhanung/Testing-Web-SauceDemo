@@ -11,9 +11,10 @@ public class LoginPage extends PageObject {
     @Managed
     WebDriver driver = getDriver();
 
-    private By usernameField = By.id("user-name");
-    private By passwordField = By.id("password");
-    private By loginButtonField = By.id("login-button");
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.id("password");
+    private final By loginButtonField = By.id("login-button");
+
 
     public void inputUsername(String username){
         driver.findElement(usernameField).sendKeys(username);
@@ -25,4 +26,8 @@ public class LoginPage extends PageObject {
     public void clickLoginButton(){
         driver.findElement(loginButtonField).click();
     }
+    public String getUrl(){
+        return driver.getCurrentUrl();
+    }
+
 }
