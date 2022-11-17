@@ -13,10 +13,7 @@ public class InventoryPage extends PageObject {
     @Managed
     WebDriver driver = getDriver();
     Help help = new Help();
-    private String pageUrl="https://www.saucedemo.com/inventory.html";
-
-
-
+    private final String pageUrl="https://www.saucedemo.com/inventory.html";
     private final By productSortContainer = By.className("product_sort_container");
     private final By activeSortOption = By.className("active_option");
     private final By inventoryList = By.className("inventory_item_name");

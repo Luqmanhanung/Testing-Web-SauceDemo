@@ -5,5 +5,3 @@ Feature: login
     And I input password with "secret_sauce"
     And I click login button
     Then I am directed to inventory page
-
-

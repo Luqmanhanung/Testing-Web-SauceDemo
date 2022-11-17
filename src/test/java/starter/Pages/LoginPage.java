@@ -1,5 +1,6 @@
 package starter.Pages;
 
+import net.serenitybdd.screenplay.Performable;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.pages.PageObject;
@@ -23,8 +24,9 @@ public class LoginPage extends PageObject {
     public void inputPassword(String password){
         driver.findElement(passwordField).sendKeys(password);
     }
-    public void clickLoginButton(){
+    public Performable clickLoginButton(){
         driver.findElement(loginButtonField).click();
+        return null;
     }
     public String getUrl(){
         return driver.getCurrentUrl();
