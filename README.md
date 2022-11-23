@@ -1,7 +1,9 @@
 <div align="center">
   <a href="https://github.com/ALTA-Bringeee-Group1/Bringeee-API">
-    <img src="https://www.saucedemo.com/static/media/logo3x.096bf4a7.svg" width="400" height="144">
+    <img src="https://www.saucedemo.com/static/media/logo3x.096bf4a7.svg" width="400" height="144"><br />
   </a>
+  WEB Automation Testing Project
+    <br />
 </div>
 
 ## 📑 About the Project
